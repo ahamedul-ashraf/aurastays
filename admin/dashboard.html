@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Aura Stays Console</title>
+    <meta name="description" content="Access global statistics, evaluate pending partner property approvals, oversee user logs, and inspect transaction values.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="admin-dark-theme" style="background: #110F0E; color: #FFFFFF;">
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header" style="background: #1C1917; border-bottom: 1px solid rgba(197, 168, 128, 0.1);">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                    <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <span style="color: var(--accent-gold); font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(197, 168, 128, 0.3); padding: 0.3rem 0.8rem; border-radius: var(--radius-sm); letter-spacing: 0.05em;"><i class="fas fa-lock"></i> SECURE CONSOLE</span>
+                </div>
+                <div class="nav-actions">
+                    <div class="nav-dropdown">
+                        <button class="btn btn-secondary btn-small dropdown-trigger" style="background: rgba(255,255,255,0.05); color: #FFFFFF; border-color: rgba(255,255,255,0.15);">
+                            <i class="fas fa-user-shield"></i> Admin Desk <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="dropdown-menu" style="background: #1C1917; border-color: rgba(197, 168, 128, 0.15);">
+                            <a href="dashboard.html" class="dropdown-item" style="color: #FFFFFF;"><i class="fas fa-tachometer-alt"></i> Control Desk</a>
+                            <a href="../index.html" class="dropdown-item" style="color: #FFFFFF; border-top: 1px solid rgba(255,255,255,0.05);" onclick="localStorage.removeItem('admin_session')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Portal Container -->
+    <section class="section" style="min-height: 100vh; padding-top: 5rem;">
+        <div class="container">
+            <div class="dashboard-layout">
+                
+                <!-- Sidebar Menu Navigation -->
+                <aside class="dashboard-sidebar" style="background: #1C1917; border: 1px solid rgba(197, 168, 128, 0.1);">
+                    <div class="profile-summary">
+                        <div class="profile-avatar-wrapper" style="border-color: var(--accent-gold);">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="Admin Director" id="avatar-img">
+                        </div>
+                        <h3 style="color: #FFFFFF;">System Admin</h3>
+                        <p style="color: var(--accent-gold);">admin_director</p>
+                    </div>
+
+                    <div class="sidebar-menu">
+                        <a href="dashboard.html" class="sidebar-link active" style="color: #FFFFFF;"><i class="fas fa-tachometer-alt" style="color: var(--accent-gold);"></i> Dashboard</a>
+                        <a href="../index.html" class="sidebar-link logout-link" style="color: #E74C3C;" onclick="localStorage.removeItem('admin_session')"><i class="fas fa-sign-out-alt"></i> Exit Console</a>
+                    </div>
+                </aside>
+
+                <!-- Right Side Content Panel -->
+                <main class="dashboard-content">
+                    
+                    <!-- Welcome Banner -->
+                    <div class="welcome-widget" style="background: linear-gradient(135deg, #1C1917 0%, #2A2421 100%); border: 1px solid rgba(197, 168, 128, 0.1);">
+                        <h2 style="color: #FFFFFF;">Global Controls Console</h2>
+                        <p style="color: rgba(255,255,255,0.6);">System core operational status is stable. 2 pending vendor property onboarding requests require evaluation.</p>
+                    </div>
+
+                    <!-- Metrics Stats row -->
+                    <div class="stats-grid">
+                        <div class="stat-card" style="background: #1C1917; border: 1px solid rgba(255,255,255,0.05);">
+                            <div class="stat-icon" style="background: rgba(197, 168, 128, 0.1); color: var(--accent-gold);"><i class="fas fa-wallet"></i></div>
+                            <div class="stat-details">
+                                <h4 style="color: rgba(255,255,255,0.6);">Gross Revenue</h4>
+                                <p class="stat-number" style="color: #FFFFFF;">$284,500</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="background: #1C1917; border: 1px solid rgba(255,255,255,0.05);">
+                            <div class="stat-icon" style="background: rgba(197, 168, 128, 0.1); color: var(--accent-gold);"><i class="fas fa-hotel"></i></div>
+                            <div class="stat-details">
+                                <h4 style="color: rgba(255,255,255,0.6);">Active Stays</h4>
+                                <p class="stat-number" style="color: #FFFFFF;">24</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="background: #1C1917; border: 1px solid rgba(255,255,255,0.05);">
+                            <div class="stat-icon" style="background: rgba(197, 168, 128, 0.1); color: var(--accent-gold);"><i class="fas fa-user-friends"></i></div>
+                            <div class="stat-details">
+                                <h4 style="color: rgba(255,255,255,0.6);">Total Members</h4>
+                                <p class="stat-number" style="color: #FFFFFF;">1,180</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Revenue Growth Charts -->
+                    <div class="admin-panel-card" style="background: #1C1917; border: 1px solid rgba(197, 168, 128, 0.1); margin-bottom: 2rem;">
+                        <h3 style="color: #FFFFFF; font-size: 1.25rem; margin-bottom: 1.5rem;">Gross Revenue Growth (2026)</h3>
+                        <div class="chart-wrapper">
+                            <div class="chart-bars-container" style="display: flex; justify-content: space-around; align-items: flex-end; height: 250px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                                <!-- Jan -->
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 60px;">
+                                    <span style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;">$145k</span>
+                                    <div class="chart-bar" style="height: 120px; width: 100%; background: linear-gradient(to top, rgba(197, 168, 128, 0.3), var(--accent-gold)); border-radius: 4px 4px 0 0;"></div>
+                                    <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Jan</span>
+                                </div>
+                                <!-- Feb -->
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 60px;">
+                                    <span style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;">$180k</span>
+                                    <div class="chart-bar" style="height: 155px; width: 100%; background: linear-gradient(to top, rgba(197, 168, 128, 0.3), var(--accent-gold)); border-radius: 4px 4px 0 0;"></div>
+                                    <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Feb</span>
+                                </div>
+                                <!-- Mar -->
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 60px;">
+                                    <span style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;">$210k</span>
+                                    <div class="chart-bar" style="height: 180px; width: 100%; background: linear-gradient(to top, rgba(197, 168, 128, 0.3), var(--accent-gold)); border-radius: 4px 4px 0 0;"></div>
+                                    <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Mar</span>
+                                </div>
+                                <!-- Apr -->
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 60px;">
+                                    <span style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;">$284k</span>
+                                    <div class="chart-bar" style="height: 230px; width: 100%; background: linear-gradient(to top, rgba(197, 168, 128, 0.3), var(--accent-gold)); border-radius: 4px 4px 0 0;"></div>
+                                    <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Apr</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending property approvals table -->
+                    <div class="admin-panel-card" style="background: #1C1917; border: 1px solid rgba(197, 168, 128, 0.1); margin-bottom: 2rem;">
+                        <h3 style="color: #FFFFFF; font-size: 1.25rem; margin-bottom: 1.5rem;">Pending Vendor Approvals</h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; color: rgba(255,255,255,0.5);">
+                                        <th style="padding: 0.8rem 0;">Property Name</th>
+                                        <th>Brand Vendor</th>
+                                        <th>Base Pricing</th>
+                                        <th>Documents</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);" id="approval-row-1">
+                                        <td style="padding: 1rem 0; font-weight: 600;">Soneva Fushi Villa</td>
+                                        <td>Kingsley Luxury Stays</td>
+                                        <td style="font-weight: 700; color: var(--accent-gold);">$1850/night</td>
+                                        <td><a href="#" style="color: var(--accent-gold);"><i class="fas fa-file-pdf"></i> license_verif.pdf</a></td>
+                                        <td>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button class="btn btn-primary btn-small approve-btn" data-row="approval-row-1">Approve</button>
+                                                <button class="btn btn-secondary btn-small reject-btn" data-row="approval-row-1" style="background: transparent; color: #E74C3C; border-color: rgba(231, 76, 60, 0.3);">Reject</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);" id="approval-row-2">
+                                        <td style="padding: 1rem 0; font-weight: 600;">Singita Lodge Suite</td>
+                                        <td>Safaris Collection</td>
+                                        <td style="font-weight: 700; color: var(--accent-gold);">$2400/night</td>
+                                        <td><a href="#" style="color: var(--accent-gold);"><i class="fas fa-file-pdf"></i> lodge_proof.pdf</a></td>
+                                        <td>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button class="btn btn-primary btn-small approve-btn" data-row="approval-row-2">Approve</button>
+                                                <button class="btn btn-secondary btn-small reject-btn" data-row="approval-row-2" style="background: transparent; color: #E74C3C; border-color: rgba(231, 76, 60, 0.3);">Reject</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- System activity logs list -->
+                    <div class="admin-panel-card" style="background: #1C1917; border: 1px solid rgba(197, 168, 128, 0.1);">
+                        <h3 style="color: #FFFFFF; font-size: 1.25rem; margin-bottom: 1.5rem;">System Logs</h3>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem; font-family: monospace; font-size: 0.85rem; color: rgba(255,255,255,0.6);">
+                            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">[2026-06-29 22:15:32] Guest Johnathan Sterling successfully booked Executive Suite at Aman Tokyo ($4245.00 charged).</div>
+                            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">[2026-06-29 21:04:12] Vendor Victoria Kingsley uploaded license validation proof for Soneva Fushi Villa.</div>
+                            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">[2026-06-29 19:42:01] Guest Alexander Sterling updated profile billing address records.</div>
+                        </div>
+                    </div>
+
+                </main>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: #1C1917; border-top: 1px solid rgba(197, 168, 128, 0.1);">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p style="color: rgba(255,255,255,0.4);">&copy; 2026 Aura Stays Console. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="../privacy.html" style="color: rgba(255,255,255,0.4);">Privacy Policy</a>
+                    <a href="../terms.html" style="color: rgba(255,255,255,0.4);">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

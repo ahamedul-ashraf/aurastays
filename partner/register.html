@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Onboarding | Aura Stays</title>
+    <meta name="description" content="Onboard your luxury hotel, private sanctuary, resort or villa on Aura Stays. Access elite global travelers.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../search.html">Explore</a>
+                    <a href="../about.html">Our Story</a>
+                    <a href="../contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="../login.html" class="btn btn-secondary btn-small">Sign In</a>
+                    <a href="../signup.html" class="btn btn-primary btn-small">Register</a>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header" style="background-image: linear-gradient(rgba(30, 28, 26, 0.75), rgba(30, 28, 26, 0.75)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1500&auto=format&fit=crop');">
+        <div class="page-header-content">
+            <h1>Partner With Aura</h1>
+            <div class="breadcrumbs">
+                <a href="../index.html">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Partner Onboarding</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Registration section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid-2" style="gap: 4rem;">
+                
+                <!-- Left onboarding benefits -->
+                <div>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">Aura Listings Club</span>
+                    <h2 style="font-size: 2.8rem; font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem;">Showcase Your Sanctuary to <span>Elite Travelers</span></h2>
+                    <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">Aura Stays connects boutique hoteliers and luxury villa owners with a global audience of high-net-worth travelers looking for curated, premium accommodations.</p>
+
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+                            <div style="background: var(--bg-neutral); color: var(--accent-gold); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><i class="fas fa-percent"></i></div>
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem;">Lower Commission Rates</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem;">Only 8% commission per completed booking, compared to the industry standard of 15% to 22%.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+                            <div style="background: var(--bg-neutral); color: var(--accent-gold); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><i class="fas fa-chart-line"></i></div>
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem;">Detailed Vendor Analytics</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem;">Review booking stats, room popularity charts, monthly earnings records, and check-in schedules.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1.2rem; align-items: flex-start;">
+                            <div style="background: var(--bg-neutral); color: var(--accent-gold); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><i class="fas fa-shield-alt"></i></div>
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem;">Strict Verification Standards</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem;">We manually review every property submission to maintain the absolute luxury integrity of our site.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form Box -->
+                <div>
+                    <div class="sticky-card" style="position: static; padding: 3rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 500; margin-bottom: 1.8rem; border-bottom: 1px solid var(--bg-neutral); padding-bottom: 0.8rem;">Vendor Registration</h3>
+                        
+                        <form id="partner-signup-form" action="dashboard.html">
+                            <div class="form-group">
+                                <label for="vendor-name">Full Name</label>
+                                <input type="text" id="vendor-name" placeholder="Victoria Kingsley" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor-company">Company / Hotel Brand</label>
+                                <input type="text" id="vendor-company" placeholder="Kingsley Luxury Stays" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor-email">Work Email</label>
+                                <input type="email" id="vendor-email" placeholder="victoria@kingsleystays.com" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor-phone">Business Phone</label>
+                                <input type="tel" id="vendor-phone" placeholder="+1 234 567 8900" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 2rem;">
+                                <label for="vendor-doc">Proof of ownership/license (PDF)</label>
+                                <input type="file" id="vendor-doc" accept=".pdf,.doc,.docx" required style="width: 100%; font-size: 0.9rem; cursor: pointer;">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Onboarding Request</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="../index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../search.html">All Stays</a></li>
+                        <li><a href="../about.html">Our Story</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="../login.html">Member Account</a></li>
+                        <li><a href="register.html">Property Vendor</a></li>
+                        <li><a href="../admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script>
+        const partnerForm = document.getElementById('partner-signup-form');
+        if (partnerForm) {
+            partnerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                showToast('Verifying license documents and submitting application...', 'info');
+                setTimeout(() => {
+                    showToast('Registration submitted! Redirecting to Vendor Dashboard...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1200);
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>

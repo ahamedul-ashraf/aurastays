@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Luxury Property | Aura Stays Partner</title>
+    <meta name="description" content="Add your luxury property. Describe rooms, specify base pricing, select hotel amenities and publish details.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../search.html">Explore</a>
+                    <a href="../about.html">Our Story</a>
+                    <a href="../contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="nav-dropdown">
+                        <button class="btn btn-secondary btn-small dropdown-trigger">
+                            <i class="fas fa-store"></i> Partner Suite <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> Vendor Desk</a>
+                            <a href="add-property.html" class="dropdown-item"><i class="fas fa-plus-circle"></i> Add Property</a>
+                            <a href="../index.html" class="dropdown-item" style="border-top: 1px solid var(--bg-neutral);" onclick="localStorage.removeItem('partner_session')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Portal Container -->
+    <section class="section" style="background: var(--bg-light); min-height: 100vh;">
+        <div class="container">
+            <div class="dashboard-layout">
+                
+                <!-- Sidebar Menu Navigation -->
+                <aside class="dashboard-sidebar">
+                    <div class="profile-summary">
+                        <div class="profile-avatar-wrapper">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop" alt="Victoria" id="avatar-img">
+                            <label for="avatar-upload" class="avatar-upload-btn" aria-label="Upload Avatar">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="avatar-upload" style="display: none;" accept="image/*">
+                        </div>
+                        <h3>Victoria Kingsley</h3>
+                        <p>victoria@kingsleystays.com</p>
+                    </div>
+
+                    <div class="sidebar-menu">
+                        <a href="dashboard.html" class="sidebar-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="add-property.html" class="sidebar-link active"><i class="fas fa-plus-circle"></i> Add Property</a>
+                        <a href="../index.html" class="sidebar-link logout-link" onclick="localStorage.removeItem('partner_session')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </aside>
+
+                <!-- Right Side Content Panel -->
+                <main class="dashboard-content">
+                    
+                    <div class="bookings-section-header" style="border-bottom: 1px solid var(--bg-neutral); padding-bottom: 1rem; margin-bottom: 2rem;">
+                        <h2 style="font-size: 2.2rem; font-weight: 300;">Publish New Sanctuary</h2>
+                    </div>
+
+                    <!-- Add Property Multi Step Form wrapper -->
+                    <div class="dashboard-panel-card">
+                        <form id="add-property-form">
+                            
+                            <!-- Step 1: Basic Information -->
+                            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem;">1. Property Description</h3>
+                            <div class="profile-grid-cols">
+                                <div class="form-group">
+                                    <label for="prop-name">Property Name</label>
+                                    <input type="text" id="prop-name" placeholder="e.g. Soneva Jani Overwater Villas" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prop-type">Property Category</label>
+                                    <select id="prop-type" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm); cursor: pointer;">
+                                        <option value="hotel">Luxury Hotel</option>
+                                        <option value="resort">Premium Resort</option>
+                                        <option value="villa">Private Sanctuary / Villa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="prop-address">Property Address</label>
+                                <input type="text" id="prop-address" placeholder="e.g. No. 100 Medhufaru Lagoon, Noonu Atoll, Maldives" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 2.5rem;">
+                                <label for="prop-desc">Overview Description</label>
+                                <textarea id="prop-desc" placeholder="Provide a compelling overview describing structural features, panoramic views, wellness philosophies..." rows="4" required style="width: 100%; padding: 0.9rem; border: 1px solid var(--bg-neutral); border-radius: var(--radius-sm); font-size: 0.95rem; resize: none; outline: none;"></textarea>
+                            </div>
+
+                            <!-- Step 2: Pricing & Details -->
+                            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; border-top: 1px solid var(--bg-neutral); padding-top: 2rem;">2. Pricing & Capacity</h3>
+                            <div class="profile-grid-cols">
+                                <div class="form-group">
+                                    <label for="prop-price">Base Price Per Night ($)</label>
+                                    <input type="number" id="prop-price" placeholder="e.g. 1250" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prop-guests">Max Guests Allowed</label>
+                                    <input type="number" id="prop-guests" placeholder="e.g. 4" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                            </div>
+                            <div class="profile-grid-cols" style="margin-bottom: 2.5rem;">
+                                <div class="form-group">
+                                    <label for="prop-stars">Star Rating</label>
+                                    <select id="prop-stars" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm); cursor: pointer;">
+                                        <option value="5">5 Star Collection</option>
+                                        <option value="4">4 Star Premium</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="prop-rooms">Total Rooms Count</label>
+                                    <input type="number" id="prop-rooms" placeholder="e.g. 15" required style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Amenities -->
+                            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; border-top: 1px solid var(--bg-neutral); padding-top: 2rem;">3. Select Stays Amenities</h3>
+                            <div class="form-group" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 2.5rem;">
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="wifi" checked> WiFi Included
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="pool" checked> Infinity Pool
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="spa" checked> Spa Sanctuary
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="gym" checked> Fitness Gym
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="dining"> Michelin Dining
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.95rem;">
+                                    <input type="checkbox" class="prop-amenity" value="butler"> Butler Service
+                                </label>
+                            </div>
+
+                            <!-- Step 4: Photo uploads -->
+                            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; border-top: 1px solid var(--bg-neutral); padding-top: 2rem;">4. Media Files & Verification</h3>
+                            <div class="form-group" style="margin-bottom: 2rem;">
+                                <label for="prop-files">Upload high-res property photography (Max 5 photos)</label>
+                                <input type="file" id="prop-files" multiple accept="image/*" required style="width: 100%; font-size: 0.95rem; cursor: pointer;">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="padding: 0.9rem 4rem;">Publish Sanctuary Stay</button>
+                        </form>
+                    </div>
+
+                </main>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="../index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="../search.html">All Stays</a></li>
+                        <li><a href="../about.html">Our Story</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="../login.html">Member Account</a></li>
+                        <li><a href="register.html">Property Vendor</a></li>
+                        <li><a href="../admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script>
+        const addPropForm = document.getElementById('add-property-form');
+        if (addPropForm) {
+            addPropForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                showToast('Publishing property and registering metadata with database...', 'info');
+                setTimeout(() => {
+                    showToast('Sanctuary published successfully! View it in your properties list.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1200);
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>

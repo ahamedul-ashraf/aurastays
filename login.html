@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Aura Stays</title>
+    <meta name="description" content="Access your member dashboard, view saved hotels, review booking histories and update preferences securely.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Main Auth Screen Wrapper -->
+    <section class="auth-container">
+        <div class="auth-card">
+            
+            <div class="auth-header">
+                <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-gem" style="color: var(--accent-gold); font-size: 2.2rem;"></i>
+                    <h1 style="color: var(--text-main); font-size: 2.2rem;">AURA<span>STAYS</span></h1>
+                </a>
+                <h2>Welcome Back</h2>
+                <p>Enter details below to log in to your sanctuary portal.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" placeholder="alexander@luxury.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.2rem;">
+                    <label for="password">Security Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <i class="far fa-eye password-toggle"></i>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me"> Keep me logged in
+                    </label>
+                    <a href="forgot-password.html" style="color: var(--accent-gold); font-weight: 600;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem;">Sign In</button>
+            </form>
+
+            <!-- Social Logins -->
+            <div class="social-login-title">Or login using</div>
+            <div class="social-login-btns">
+                <button class="social-btn"><i class="fab fa-google" style="color: #DB4437;"></i> Google</button>
+                <button class="social-btn"><i class="fab fa-apple"></i> Apple ID</button>
+            </div>
+
+            <div class="auth-links">
+                Don't have an account? <a href="signup.html">Create Account</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

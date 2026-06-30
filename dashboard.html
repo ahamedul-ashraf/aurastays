@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Aura Stays</title>
+    <meta name="description" content="View your active reservations, saved hotels wishlist, billing records and account parameters.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="search.html">Explore</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="nav-dropdown">
+                        <button class="btn btn-secondary btn-small dropdown-trigger">
+                            <i class="fas fa-user-circle"></i> Account <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="my-bookings.html" class="dropdown-item"><i class="fas fa-suitcase"></i> My Bookings</a>
+                            <a href="profile.html" class="dropdown-item"><i class="fas fa-user-cog"></i> Settings</a>
+                            <a href="index.html" class="dropdown-item" style="border-top: 1px solid var(--bg-neutral);" onclick="localStorage.removeItem('user_session')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo" style="color: var(--text-main);">
+                <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                <h1 style="color: var(--text-main);">AURA<span>STAYS</span></h1>
+            </a>
+            <i class="fas fa-times mobile-nav-close" id="mobile-menu-close-btn"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html">Explore</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <a href="profile.html">Profile</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="index.html" class="btn btn-outline" onclick="localStorage.removeItem('user_session')">Log Out</a>
+        </div>
+    </div>
+
+    <!-- Dashboard Portal Container -->
+    <section class="section" style="background: var(--bg-light); min-height: 100vh;">
+        <div class="container">
+            <div class="dashboard-layout">
+                
+                <!-- Sidebar Menu Navigation -->
+                <aside class="dashboard-sidebar">
+                    <div class="profile-summary">
+                        <div class="profile-avatar-wrapper">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" alt="Alexander" id="avatar-img">
+                            <label for="avatar-upload" class="avatar-upload-btn" aria-label="Upload Avatar">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="avatar-upload" style="display: none;" accept="image/*">
+                        </div>
+                        <h3 id="profile-name-header">Alexander Sterling</h3>
+                        <p id="profile-email-header">alexander@luxury.com</p>
+                    </div>
+
+                    <div class="sidebar-menu">
+                        <a href="dashboard.html" class="sidebar-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="my-bookings.html" class="sidebar-link"><i class="fas fa-suitcase"></i> My Bookings</a>
+                        <a href="profile.html" class="sidebar-link"><i class="fas fa-user-cog"></i> Profile Settings</a>
+                        <a href="index.html" class="sidebar-link logout-link" onclick="localStorage.removeItem('user_session')"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </aside>
+
+                <!-- Right Side Content Panel -->
+                <main class="dashboard-content">
+                    
+                    <!-- Welcome Banner -->
+                    <div class="welcome-widget">
+                        <h2>Welcome back, <span id="welcome-name">Alexander</span></h2>
+                        <p>Your next luxury escape awaits. Explore your reservation logs or find new stays.</p>
+                    </div>
+
+                    <!-- Metrics Stats row -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-details">
+                                <h4>Upcoming Stays</h4>
+                                <p class="stat-number" id="stat-upcoming-count">1</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                            <div class="stat-details">
+                                <h4>Saved Stays</h4>
+                                <p class="stat-number" id="stat-saved-count">3</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                            <div class="stat-details">
+                                <h4>Total Nights</h4>
+                                <p class="stat-number">12</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Stays list summary -->
+                    <div>
+                        <div class="bookings-section-header">
+                            <h3>Upcoming Reservation</h3>
+                            <a href="my-bookings.html" style="color: var(--accent-gold); font-weight: 600; font-size: 0.9rem;">View All Bookings <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
+                        </div>
+                        
+                        <div class="booking-card-list">
+                            <!-- Stripe Booking card -->
+                            <div class="booking-strip-card">
+                                <div class="booking-strip-img">
+                                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=300&auto=format&fit=crop" alt="Aman Resorts Tokyo">
+                                </div>
+                                <div class="booking-strip-details">
+                                    <div class="booking-strip-meta">
+                                        <div>
+                                            <h4 class="booking-hotel-name">Aman Resorts, Tokyo</h4>
+                                            <div class="booking-dates">
+                                                <i class="far fa-calendar-alt"></i> <span>July 15 - July 18, 2026</span>
+                                            </div>
+                                        </div>
+                                        <span class="booking-status status-upcoming">Upcoming</span>
+                                    </div>
+                                    <div class="booking-strip-footer">
+                                        <div class="booking-strip-pricing">
+                                            Suite: <b>Executive Imperial Suite</b><br>
+                                            Total Paid: <span id="booking-price-val">$4245.00</span>
+                                        </div>
+                                        <div class="booking-strip-actions">
+                                            <a href="booking-details.html" class="btn btn-outline btn-small">Details</a>
+                                            <button class="btn btn-secondary btn-small cancel-booking-btn" data-hotel="Aman Resorts, Tokyo" style="background: transparent; color: #E74C3C; border-color: rgba(231, 76, 60, 0.4);">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Activities links -->
+                    <div class="dashboard-panel-card">
+                        <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.2rem;">Quick Account Actions</h3>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="search.html" class="btn btn-primary btn-small"><i class="fas fa-search"></i> Book Another Escape</a>
+                            <a href="profile.html" class="btn btn-outline btn-small"><i class="fas fa-user-lock"></i> Update Passwords</a>
+                            <a href="contact.html" class="btn btn-outline btn-small"><i class="fas fa-question-circle"></i> Get Support</a>
+                        </div>
+                    </div>
+
+                </main>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">All Stays</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="partner/register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Member Account</a></li>
+                        <li><a href="partner/register.html">Property Vendor</a></li>
+                        <li><a href="admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-to-top" id="scroll-top-btn" aria-label="Scroll to Top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

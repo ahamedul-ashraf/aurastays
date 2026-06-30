@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Aura Stays</title>
+    <meta name="description" content="Enter guest billing details, select payment options, apply coupons, and confirm your luxury reservation securely.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .checkout-form-box {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+        }
+        .checkout-form-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--bg-neutral);
+            padding-bottom: 0.8rem;
+        }
+        .payment-method-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .payment-radio-btn {
+            border: 1px solid var(--bg-neutral);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+        .payment-radio-btn i {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+        }
+        .payment-method-selector input[type="radio"] {
+            display: none;
+        }
+        .payment-method-selector input[type="radio"]:checked + .payment-radio-btn {
+            border-color: var(--accent-gold);
+            background: var(--bg-neutral);
+        }
+        .payment-form-sub {
+            display: none;
+            padding-top: 1rem;
+        }
+        .checkout-summary-card {
+            background: var(--bg-neutral);
+            border-radius: var(--radius-md);
+            padding: 2.2rem;
+            border: 1px solid var(--glass-border);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+        .summary-row.total-row {
+            border-top: 1px solid var(--accent-gold-light);
+            padding-top: 1.2rem;
+            margin-top: 1.2rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="search.html" class="active">Explore</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary btn-small">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary btn-small">Register</a>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo" style="color: var(--text-main);">
+                <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                <h1 style="color: var(--text-main);">AURA<span>STAYS</span></h1>
+            </a>
+            <i class="fas fa-times mobile-nav-close" id="mobile-menu-close-btn"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html" class="active">Explore</a>
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="signup.html" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Secure Checkout</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="room-selection.html">Room Selection</a>
+                <span class="separator">/</span>
+                <span class="current">Checkout</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="checkout-grid">
+                
+                <!-- Left Billing details -->
+                <div>
+                    <form id="checkout-billing-form">
+                        <!-- Guest Info Box -->
+                        <div class="checkout-form-box">
+                            <h3>Guest Information</h3>
+                            <div class="profile-grid-cols">
+                                <div class="form-group">
+                                    <label for="billing-name">Full Name</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input type="text" id="billing-name" placeholder="Johnathan Sterling" required style="padding-left: 2.8rem;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-email">Email Address</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input type="email" id="billing-email" placeholder="johnathan@sterling.com" required style="padding-left: 2.8rem;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-grid-cols">
+                                <div class="form-group">
+                                    <label for="billing-phone">Phone Number</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-phone-alt input-icon"></i>
+                                        <input type="tel" id="billing-phone" placeholder="+1 234 567 8900" style="padding-left: 2.8rem;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-requests">Special Requests</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-concierge-bell input-icon"></i>
+                                        <input type="text" id="billing-requests" placeholder="e.g. Feather pillow, early check-in" style="padding-left: 2.8rem;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods Box -->
+                        <div class="checkout-form-box">
+                            <h3>Select Payment Option</h3>
+                            <div class="payment-method-selector">
+                                <label>
+                                    <input type="radio" name="payment-method" value="card" checked>
+                                    <span class="payment-radio-btn">
+                                        <i class="far fa-credit-card"></i> Card
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="payment-method" value="upi">
+                                    <span class="payment-radio-btn">
+                                        <i class="fas fa-mobile-alt"></i> UPI / QR
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="payment-method" value="netbanking">
+                                    <span class="payment-radio-btn">
+                                        <i class="fas fa-university"></i> Net Banking
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="payment-method" value="wallet">
+                                    <span class="payment-radio-btn">
+                                        <i class="fas fa-wallet"></i> Wallet
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- Card Sub Form -->
+                            <div class="payment-form-sub" id="payment-form-card" style="display: block;">
+                                <div class="form-group">
+                                    <label for="card-holder">Cardholder Name</label>
+                                    <input type="text" id="card-holder" placeholder="Johnathan Sterling" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-number">Card Number</label>
+                                    <input type="text" id="card-number" placeholder="4111 2222 3333 4444" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                                <div class="profile-grid-cols">
+                                    <div class="form-group">
+                                        <label for="card-expiry">Expiration Date</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/YY" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="password" id="card-cvv" placeholder="***" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- UPI Sub Form -->
+                            <div class="payment-form-sub" id="payment-form-upi">
+                                <div class="form-group">
+                                    <label for="upi-id">Enter UPI ID</label>
+                                    <input type="text" id="upi-id" placeholder="sterling@okaxis" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm);">
+                                </div>
+                            </div>
+
+                            <!-- Netbanking Form -->
+                            <div class="payment-form-sub" id="payment-form-netbanking">
+                                <div class="form-group">
+                                    <label for="bank-select">Select Bank</label>
+                                    <select id="bank-select" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm); cursor: pointer;">
+                                        <option value="chase">Chase Bank</option>
+                                        <option value="boa">Bank of America</option>
+                                        <option value="hsbc">HSBC Global</option>
+                                        <option value="wells">Wells Fargo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Wallet Form -->
+                            <div class="payment-form-sub" id="payment-form-wallet">
+                                <div class="form-group">
+                                    <label for="wallet-select">Select Wallet</label>
+                                    <select id="wallet-select" style="width: 100%; border: 1px solid var(--bg-neutral); padding: 0.9rem; border-radius: var(--radius-sm); cursor: pointer;">
+                                        <option value="paypal">PayPal</option>
+                                        <option value="apple">Apple Pay</option>
+                                        <option value="google">Google Wallet</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms box -->
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <label class="checkbox-label" style="text-transform: none; font-weight: 500;">
+                                <input type="checkbox" id="terms-agree" required> I agree to the <a href="terms.html" style="color: var(--accent-gold); font-weight: 600;">Terms & Conditions</a> and <a href="privacy.html" style="color: var(--accent-gold); font-weight: 600;">Privacy Policy</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.2rem; font-size: 1.1rem; margin-top: 1.5rem;">Confirm & Pay Now</button>
+                    </form>
+                </div>
+
+                <!-- Right Checkout summary calculations -->
+                <div>
+                    <aside class="checkout-summary-card" id="checkout-calculations">
+                        <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; border-bottom: 1px solid var(--accent-gold-light); padding-bottom: 0.8rem;">Booking Summary</h3>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 id="checkout-room-name" style="font-size: 1.1rem; font-weight: 600;">Executive Imperial Suite</h4>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;"><i class="fas fa-gem" style="color: var(--accent-gold);"></i> Aman Resorts, Tokyo</p>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div class="summary-row">
+                                <span style="color: var(--text-muted);">Rate Per Night</span>
+                                <span id="checkout-room-price" style="font-weight: 600;">$1250</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: var(--text-muted);">Stay Duration</span>
+                                <span id="checkout-nights" style="font-weight: 600;">3 nights</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: var(--text-muted);">Subtotal</span>
+                                <span id="checkout-subtotal" style="font-weight: 600;">$3750.00</span>
+                            </div>
+                            <div class="summary-row" id="checkout-discount-row" style="display: none; color: #2ECC71;">
+                                <span>Discount</span>
+                                <span id="checkout-discount">-$375.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: var(--text-muted);">Service Fee</span>
+                                <span id="checkout-service-fee" style="font-weight: 600;">$45.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: var(--text-muted);">Occupancy Tax (12%)</span>
+                                <span id="checkout-tax" style="font-weight: 600;">$450.00</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span>Total Amount</span>
+                                <span id="checkout-total" style="color: var(--accent-gold); font-family: var(--font-serif); font-size: 1.6rem;">$4245.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Coupon Form Box -->
+                        <div style="margin-top: 2rem; border-top: 1px solid var(--accent-gold-light); padding-top: 1.5rem;">
+                            <label style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Have a Coupon Code?</label>
+                            <form id="promo-code-form" style="display: flex; gap: 0.5rem;">
+                                <input type="text" placeholder="e.g. AURA10" style="flex: 1; border: 1px solid rgba(197, 168, 128, 0.3); padding: 0.6rem 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; text-transform: uppercase; background: var(--white);">
+                                <button type="submit" class="btn btn-primary btn-small">Apply</button>
+                            </form>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;"><i class="fas fa-tag"></i> Use promo code <b>AURA10</b> to get 10% off room rates.</p>
+                        </div>
+                    </aside>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">All Stays</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="partner/register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Member Account</a></li>
+                        <li><a href="partner/register.html">Property Vendor</a></li>
+                        <li><a href="admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

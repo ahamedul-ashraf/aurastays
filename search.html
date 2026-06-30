@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Luxury Stays | Aura Stays</title>
+    <meta name="description" content="Browse our luxury properties, private resorts, and boutique stays. Filter by price, amenities, rating and booking policies.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="search.html" class="active">Explore</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary btn-small">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary btn-small">Register</a>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo" style="color: var(--text-main);">
+                <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                <h1 style="color: var(--text-main);">AURA<span>STAYS</span></h1>
+            </a>
+            <i class="fas fa-times mobile-nav-close" id="mobile-menu-close-btn"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html" class="active">Explore</a>
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="signup.html" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Luxury Collection</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Explore Stays</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results Section -->
+    <section class="section">
+        <div class="container">
+            <div class="dashboard-layout">
+                
+                <!-- Sidebar Filters -->
+                <aside class="dashboard-sidebar">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 600; border-bottom: 1px solid var(--bg-neutral); padding-bottom: 0.8rem;">Filters</h3>
+                    
+                    <form id="search-form-control">
+                        <!-- Destination Query -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label for="search-dest">Destination</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-search input-icon"></i>
+                                <input type="text" id="search-dest" placeholder="Search locations..." style="padding-left: 2.5rem;">
+                            </div>
+                        </div>
+
+                        <!-- Price Slider -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <label style="margin-bottom: 0;">Max Price Per Night</label>
+                                <span id="price-val" style="font-weight: 700; color: var(--accent-gold);">$2500</span>
+                            </div>
+                            <input type="range" id="price-slider" min="200" max="2500" step="50" value="2500" style="width: 100%; accent-color: var(--accent-gold); cursor: pointer;">
+                        </div>
+
+                        <!-- Rating filter -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label>Star Category</label>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-stars" value="5"> 5 Stars Collection
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-stars" value="4"> 4 Stars Premium
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Property Types -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label>Property Type</label>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-type filter-checkbox" value="hotel"> Luxury Hotel
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-type filter-checkbox" value="resort"> Premium Resort
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-type filter-checkbox" value="villa"> Private Sanctuary / Villa
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Amenities -->
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label>Amenities</label>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-amenity filter-checkbox" value="breakfast"> Breakfast Included
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-amenity filter-checkbox" value="pool"> Swimming Pool
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-amenity filter-checkbox" value="spa"> Spa Services
+                                </label>
+                                <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                    <input type="checkbox" class="filter-amenity filter-checkbox" value="gym"> Wellness Center / Gym
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Free Cancellation -->
+                        <div class="form-group">
+                            <label class="checkbox-label" style="text-transform: none; font-size: 0.9rem; color: var(--text-main);">
+                                <input type="checkbox" id="filter-cancellation" class="filter-checkbox"> Free Cancellation Only
+                            </label>
+                        </div>
+                    </form>
+                </aside>
+
+                <!-- Listing Grid Panel -->
+                <main class="dashboard-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--bg-neutral); padding-bottom: 1rem;">
+                        <span id="results-count" style="font-weight: 600; color: var(--text-muted);">8 properties found</span>
+                        
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <label style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0;">Sort By</label>
+                            <select id="sort-select" style="background: var(--white); border: 1px solid var(--glass-border); padding: 0.4rem 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; cursor: pointer; color: var(--text-main);">
+                                <option value="popularity">Guest Popularity</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Guest Rating</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="hotels-listing-grid" class="grid-2">
+                        <!-- RENDERED BY MOCK DATABASE IN search.js -->
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">All Stays</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="partner/register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Member Account</a></li>
+                        <li><a href="partner/register.html">Property Vendor</a></li>
+                        <li><a href="admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-to-top" id="scroll-top-btn" aria-label="Scroll to Top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

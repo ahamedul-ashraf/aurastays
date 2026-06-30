@@ -1,0 +1,474 @@
+/* ==========================================================================
+   AURA STAYS - DASHBOARD STYLESHEET (css/dashboard.css)
+   ========================================================================== */
+
+/* Dashboard Layout */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2.5rem;
+    padding: 3rem 0 6rem;
+}
+
+/* Sidebar Styling */
+.dashboard-sidebar {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem 1.5rem;
+    height: fit-content;
+}
+
+.profile-summary {
+    text-align: center;
+    border-bottom: 1px solid var(--bg-neutral);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.2rem;
+}
+
+.profile-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-gold);
+}
+
+.avatar-upload-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--accent-gold);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+}
+
+.avatar-upload-btn:hover {
+    background: var(--accent-gold-hover);
+    transform: scale(1.1);
+}
+
+.profile-summary h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.profile-summary p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background: var(--bg-neutral);
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.sidebar-link.logout-link {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--bg-neutral);
+    padding-top: 1.5rem;
+}
+
+.sidebar-link.logout-link i {
+    color: #E74C3C;
+}
+
+.sidebar-link.logout-link:hover {
+    background: rgba(231, 76, 60, 0.05);
+    color: #E74C3C;
+}
+
+/* Dashboard Content Panel */
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.welcome-widget {
+    background: linear-gradient(135deg, #1E1C1A 0%, #3A3530 100%);
+    color: #FFFFFF;
+    padding: 3rem;
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-widget::after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 250px;
+    height: 250px;
+    border: 3px solid rgba(197, 168, 128, 0.08);
+    border-radius: 50%;
+}
+
+.welcome-widget h2 {
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-widget h2 span {
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.welcome-widget p {
+    color: var(--accent-gold-light);
+    font-size: 1rem;
+}
+
+/* Dashboard Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--bg-neutral);
+    border-radius: 50%;
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-details h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.stat-details p.stat-number {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 0.2rem;
+}
+
+/* Bookings Cards / Table styles */
+.bookings-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.bookings-section-header h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.dashboard-panel-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    padding: 2.2rem;
+}
+
+.booking-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.booking-strip-card {
+    display: flex;
+    border: 1px solid var(--bg-neutral);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.booking-strip-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.booking-strip-img {
+    width: 220px;
+    height: 170px;
+    flex-shrink: 0;
+}
+
+.booking-strip-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.booking-strip-details {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.booking-strip-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.booking-hotel-name {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.booking-dates {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.booking-dates i {
+    color: var(--accent-gold);
+}
+
+.booking-status {
+    padding: 0.3rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-upcoming {
+    background: rgba(46, 204, 113, 0.1);
+    color: #2ECC71;
+}
+
+.status-completed {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498DB;
+}
+
+.status-cancelled {
+    background: rgba(231, 76, 60, 0.1);
+    color: #E74C3C;
+}
+
+.booking-strip-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.booking-strip-pricing {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.booking-strip-pricing span {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    font-family: var(--font-serif);
+}
+
+.booking-strip-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Tabs Switcher component */
+.tabs-header {
+    display: flex;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--bg-neutral);
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-gold);
+    transition: var(--transition-fast);
+}
+
+.tab-btn.active {
+    color: var(--text-main);
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Profile Form styling */
+.profile-grid-cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Booking Detail Timeline */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: var(--bg-neutral);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2.2rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2rem;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--accent-gold);
+    z-index: 2;
+}
+
+.timeline-item.active .timeline-marker {
+    background: var(--accent-gold);
+}
+
+.timeline-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.timeline-content p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Partner Portal forms */
+.partner-form-section {
+    border-bottom: 1px solid var(--bg-neutral);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.partner-form-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.partner-form-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.amenity-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}

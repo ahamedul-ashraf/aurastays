@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Selection | Aura Stays</title>
+    <meta name="description" content="Select from our range of luxury rooms, executive suites, and penthouses. View pricing, amenities and policies.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .room-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .room-card-selection {
+            display: grid;
+            grid-template-columns: 350px 1fr 280px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+        .room-card-selection:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .room-card-selection.selected {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 2px var(--accent-gold);
+        }
+        .room-img-col {
+            position: relative;
+        }
+        .room-img-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .room-details-col {
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .room-features-badges {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 1.2rem 0;
+        }
+        .room-feature-badge {
+            background: var(--bg-neutral);
+            color: var(--text-muted);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .room-pricing-col {
+            padding: 2.2rem;
+            border-left: 1px solid var(--bg-neutral);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--bg-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="search.html" class="active">Explore</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary btn-small">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary btn-small">Register</a>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo" style="color: var(--text-main);">
+                <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                <h1 style="color: var(--text-main);">AURA<span>STAYS</span></h1>
+            </a>
+            <i class="fas fa-times mobile-nav-close" id="mobile-menu-close-btn"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html" class="active">Explore</a>
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="signup.html" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Select Accommodations</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="search.html">Explore Stays</a>
+                <span class="separator">/</span>
+                <span class="current">Room Selection</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Selection content -->
+    <section class="section">
+        <div class="container">
+            <div style="border-bottom: 1px solid var(--bg-neutral); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+                <p style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.05em;">Sanctuary Availability</p>
+                <h2 style="font-size: 2.2rem; font-weight: 300;">Choose Room at Aman Resorts, Tokyo</h2>
+            </div>
+
+            <div class="room-grid">
+                <!-- Room Card 1 -->
+                <div class="room-card-selection" data-room-name="Deluxe King Room" data-room-price="1250">
+                    <div class="room-img-col">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=400&auto=format&fit=crop" alt="Deluxe Room">
+                    </div>
+                    <div class="room-details-col">
+                        <div>
+                            <h3 style="font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem;">Deluxe King Room</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Boasting expansive floor-to-ceiling windows looking onto Tokyo's skyline and imperial gardens. Features traditional layout with wood panel walls and custom washi paper doors.</p>
+                            <div class="room-features-badges">
+                                <span class="room-feature-badge"><i class="fas fa-arrows-alt"></i> 65 sqm</span>
+                                <span class="room-feature-badge"><i class="fas fa-bed"></i> 1 King Bed</span>
+                                <span class="room-feature-badge"><i class="fas fa-users"></i> Max 2 Adults</span>
+                                <span class="room-feature-badge"><i class="fas fa-mountain"></i> Skyline View</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 2rem; border-top: 1px solid var(--bg-neutral); padding-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                            <span><i class="fas fa-coffee" style="color: var(--accent-gold);"></i> Breakfast Included</span>
+                            <span><i class="fas fa-check" style="color: #2ECC71;"></i> Free Cancellation</span>
+                        </div>
+                    </div>
+                    <div class="room-pricing-col">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Rate Per Night</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem;">$1250</h4>
+                        <button class="btn btn-outline select-room-btn" style="width: 100%;">Select Room</button>
+                    </div>
+                </div>
+
+                <!-- Room Card 2 -->
+                <div class="room-card-selection" data-room-name="Executive Imperial Suite" data-room-price="1850">
+                    <div class="room-img-col">
+                        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=400&auto=format&fit=crop" alt="Executive Suite" style="filter: hue-rotate(20deg);">
+                    </div>
+                    <div class="room-details-col">
+                        <div>
+                            <h3 style="font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem;">Executive Imperial Suite</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">A spacious corner suite that features a separate shoji-screen living salon, traditional stone furo deep-soaking bathtub, and personalized butler concierge service.</p>
+                            <div class="room-features-badges">
+                                <span class="room-feature-badge"><i class="fas fa-arrows-alt"></i> 120 sqm</span>
+                                <span class="room-feature-badge"><i class="fas fa-bed"></i> 1 King Bed</span>
+                                <span class="room-feature-badge"><i class="fas fa-users"></i> Max 3 Adults</span>
+                                <span class="room-feature-badge"><i class="fas fa-landmark"></i> Palace View</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 2rem; border-top: 1px solid var(--bg-neutral); padding-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                            <span><i class="fas fa-coffee" style="color: var(--accent-gold);"></i> Breakfast Included</span>
+                            <span><i class="fas fa-check" style="color: #2ECC71;"></i> Free Cancellation</span>
+                        </div>
+                    </div>
+                    <div class="room-pricing-col">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Rate Per Night</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem;">$1850</h4>
+                        <button class="btn btn-outline select-room-btn" style="width: 100%;">Select Room</button>
+                    </div>
+                </div>
+
+                <!-- Room Card 3 -->
+                <div class="room-card-selection" data-room-name="Presidential Penthouse Suite" data-room-price="3400">
+                    <div class="room-img-col">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=400&auto=format&fit=crop" alt="Presidential Penthouse" style="filter: brightness(0.9) contrast(1.1);">
+                    </div>
+                    <div class="room-details-col">
+                        <div>
+                            <h3 style="font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem;">Presidential Penthouse Suite</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">The pinnacle of luxury overlooking Japan's capital. Includes private kitchen with dedicated chef, outdoor hinoki wood thermal bath, and private gym suite.</p>
+                            <div class="room-features-badges">
+                                <span class="room-feature-badge"><i class="fas fa-arrows-alt"></i> 250 sqm</span>
+                                <span class="room-feature-badge"><i class="fas fa-bed"></i> 2 Grand King Beds</span>
+                                <span class="room-feature-badge"><i class="fas fa-users"></i> Max 4 Adults</span>
+                                <span class="room-feature-badge"><i class="fas fa-water"></i> Panoramic Bath</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 2rem; border-top: 1px solid var(--bg-neutral); padding-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                            <span><i class="fas fa-coffee" style="color: var(--accent-gold);"></i> All Meals Included</span>
+                            <span><i class="fas fa-check" style="color: #2ECC71;"></i> Free Cancellation</span>
+                        </div>
+                    </div>
+                    <div class="room-pricing-col">
+                        <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;">Rate Per Night</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem;">$3400</h4>
+                        <button class="btn btn-outline select-room-btn" style="width: 100%;">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Flow Action -->
+            <div style="display: flex; justify-content: flex-end; margin-top: 3rem;">
+                <button class="btn btn-secondary" id="continue-to-checkout" disabled style="padding: 1rem 3rem;" onclick="window.location.href='checkout.html'">Continue To Checkout <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">All Stays</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="partner/register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Member Account</a></li>
+                        <li><a href="partner/register.html">Property Vendor</a></li>
+                        <li><a href="admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

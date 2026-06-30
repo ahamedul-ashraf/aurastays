@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Resorts, Tokyo | Aura Stays Detail</title>
+    <meta name="description" content="Read reviews, view photos, check premium room amenities and booking availability at Aman Resorts Tokyo. Reserve now.">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Custom detail page layout styling */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 5rem;
+            height: 500px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item.main {
+            grid-row: span 2;
+        }
+        .view-all-photos {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: rgba(253, 251, 247, 0.95);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3.5rem;
+            margin-top: 3.5rem;
+        }
+        .amenity-detailed-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .amenity-detailed-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+        .amenity-detailed-item i {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+        .rating-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .rating-bar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+        .rating-bar-lbl {
+            width: 120px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .rating-bar-outer {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-neutral);
+            border-radius: 3px;
+            position: relative;
+        }
+        .rating-bar-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 3px;
+            background: var(--accent-gold);
+        }
+        .rating-bar-val {
+            font-weight: 700;
+            font-size: 0.9rem;
+            width: 25px;
+            text-align: right;
+        }
+        .map-box {
+            width: 100%;
+            height: 350px;
+            background: var(--bg-neutral);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            margin-top: 2rem;
+        }
+        .map-marker-pin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            text-align: center;
+        }
+        .map-marker-pin i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="page-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header always-dark" id="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gem"></i>
+                    <h1>AURA<span>STAYS</span></h1>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="search.html" class="active">Explore</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary btn-small">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary btn-small">Register</a>
+                </div>
+                <i class="fas fa-bars mobile-menu-btn" id="mobile-menu-open-btn"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="logo" style="color: var(--text-main);">
+                <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                <h1 style="color: var(--text-main);">AURA<span>STAYS</span></h1>
+            </a>
+            <i class="fas fa-times mobile-nav-close" id="mobile-menu-close-btn"></i>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="search.html" class="active">Explore</a>
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="btn btn-outline">Sign In</a>
+            <a href="signup.html" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+
+    <!-- Gallery section -->
+    <div class="container">
+        <div class="gallery-grid">
+            <div class="gallery-item main">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop" alt="Aman Main View">
+                <button class="view-all-photos"><i class="fas fa-images"></i> View Photos</button>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=400&auto=format&fit=crop" alt="Aman Pool">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=400&auto=format&fit=crop" alt="Aman Restaurant">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=400&auto=format&fit=crop" alt="Aman Spa Room">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=400&auto=format&fit=crop" alt="Aman Lobby Room">
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Content Area -->
+    <section class="section" style="padding-top: 3.5rem;">
+        <div class="container">
+            <div class="details-grid">
+                
+                <!-- Left Details content -->
+                <div>
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                        <span style="background: var(--bg-neutral); color: var(--accent-gold); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: var(--radius-sm); text-transform: uppercase;">Aman Sanctuary</span>
+                        <div class="stars" style="color: var(--accent-gold); font-size: 0.95rem;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <h2 style="font-size: 3.2rem; font-weight: 300; line-height: 1.15; margin-bottom: 1rem;">Aman Resorts, Tokyo</h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;"><i class="fas fa-map-marker-alt" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> Otemachi Tower, Chiyoda City, Tokyo, 100-0004, Japan</p>
+
+                    <div style="border-top: 1px solid var(--bg-neutral); padding-top: 2rem; margin-bottom: 2.5rem;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 500;">Sanctuary Description</h3>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.2rem;">Occupying the top six floors of the prestigious Otemachi Tower, Aman Tokyo is a monument to modern luxury, blending traditional Japanese style with contemporary grandeur. High ceilings, shoji screens, and large washi paper lanterns characterize the property, providing an atmosphere of absolute tranquility amidst the bustle of Japan's capital.</p>
+                        <p style="color: var(--text-muted); line-height: 1.8;">Our guests enjoy world-class hospitality features, including a monumental lobby looking onto the Imperial Palace gardens, an 80-foot temperature-controlled infinity pool, and the multi-award-winning Aman Spa offering traditional Japanese Kampo wellness therapies.</p>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--bg-neutral); padding-top: 2rem; margin-bottom: 2.5rem;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1.2rem; font-weight: 500;">Amenities Offered</h3>
+                        <div class="amenity-detailed-grid">
+                            <div class="amenity-detailed-item"><i class="fas fa-wifi"></i> <span>High Speed WiFi</span></div>
+                            <div class="amenity-detailed-item"><i class="fas fa-swimming-pool"></i> <span>80ft Infinity Pool</span></div>
+                            <div class="amenity-detailed-item"><i class="fas fa-spa"></i> <span>Kampo Medical Spa</span></div>
+                            <div class="amenity-detailed-item"><i class="fas fa-dumbbell"></i> <span>Fitness Gym</span></div>
+                            <div class="amenity-detailed-item"><i class="fas fa-utensils"></i> <span>Michelin Dining</span></div>
+                            <div class="amenity-detailed-item"><i class="fas fa-concierge-bell"></i> <span>24hr Valet & Butler</span></div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--bg-neutral); padding-top: 2rem; margin-bottom: 2.5rem;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 500;">Sanctuary Location Map</h3>
+                        <div class="map-box">
+                            <div class="map-marker-pin">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p style="font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--text-main); margin-top: 0.2rem; background: var(--white); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--glass-border);">Aman Tokyo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--bg-neutral); padding-top: 2rem;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 500;">Guest Reviews & Breakdown</h3>
+                        <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                            <div style="background: var(--bg-neutral); padding: 2rem; border-radius: var(--radius-md); text-align: center; width: 140px;">
+                                <h4 style="font-size: 3rem; font-weight: 700; color: var(--accent-gold); line-height: 1;">9.7</h4>
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Superb</span>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.3rem;">Based on 320 reviews</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem;">100% of our verified guests recommend this property.</p>
+                            </div>
+                        </div>
+
+                        <div class="rating-bars">
+                            <div class="rating-bar-row">
+                                <span class="rating-bar-lbl">Cleanliness</span>
+                                <div class="rating-bar-outer"><div class="rating-bar-inner" style="width: 98%;"></div></div>
+                                <span class="rating-bar-val">9.8</span>
+                            </div>
+                            <div class="rating-bar-row">
+                                <span class="rating-bar-lbl">Service</span>
+                                <div class="rating-bar-outer"><div class="rating-bar-inner" style="width: 97%;"></div></div>
+                                <span class="rating-bar-val">9.7</span>
+                            </div>
+                            <div class="rating-bar-row">
+                                <span class="rating-bar-lbl">Location</span>
+                                <div class="rating-bar-outer"><div class="rating-bar-inner" style="width: 99%;"></div></div>
+                                <span class="rating-bar-val">9.9</span>
+                            </div>
+                            <div class="rating-bar-row">
+                                <span class="rating-bar-lbl">Amenities</span>
+                                <div class="rating-bar-outer"><div class="rating-bar-inner" style="width: 95%;"></div></div>
+                                <span class="rating-bar-val">9.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sticky Card -->
+                <div>
+                    <aside class="sticky-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.8rem; border-bottom: 1px solid var(--bg-neutral); padding-bottom: 1.2rem;">
+                            <div>
+                                <span style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Pricing From</span>
+                                <h3 style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--text-main);">$1250<span style="font-family: var(--font-sans); font-size: 0.95rem; font-weight: 400; color: var(--text-muted);">/night</span></h3>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: var(--accent-gold); font-size: 0.8rem; margin-bottom: 0.2rem;"><i class="fas fa-star"></i> 5.0</div>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">320 reviews</span>
+                            </div>
+                        </div>
+
+                        <form action="room-selection.html" method="GET">
+                            <div class="form-group">
+                                <label for="booking-checkin">Check-In Date</label>
+                                <div class="input-wrapper">
+                                    <i class="far fa-calendar-alt input-icon"></i>
+                                    <input type="date" id="booking-checkin" required value="2026-07-15" style="padding-left: 2.8rem;">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.8rem;">
+                                <label for="booking-checkout">Check-Out Date</label>
+                                <div class="input-wrapper">
+                                    <i class="far fa-calendar-alt input-icon"></i>
+                                    <input type="date" id="booking-checkout" required value="2026-07-18" style="padding-left: 2.8rem;">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 2rem;">
+                                <label for="booking-guests">Guests Count</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user-friends input-icon"></i>
+                                    <select id="booking-guests" style="padding-left: 2.8rem; cursor: pointer;">
+                                        <option value="1">1 Guest</option>
+                                        <option value="2" selected>2 Guests</option>
+                                        <option value="3">3 Guests</option>
+                                        <option value="4">4 Guests</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Check Room Availability</button>
+                        </form>
+                        <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;"><i class="fas fa-info-circle"></i> You won't be charged yet in this step.</p>
+                    </aside>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-gem" style="color: var(--accent-gold);"></i>
+                        <h1 style="color: #FFFFFF;">AURA<span>STAYS</span></h1>
+                    </a>
+                    <p>Crafting bespoke travel experiences. We list premium, high-end retreats, wellness sanctuaries, and private villas worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">All Stays</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="partner/register.html">Partner Onboarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Member Account</a></li>
+                        <li><a href="partner/register.html">Property Vendor</a></li>
+                        <li><a href="admin/login.html">System Administrator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Aura Concierge</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 100 Fifth Avenue, New York, NY</li>
+                        <li><i class="fas fa-phone-alt"></i> +1 800 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> concierge@aurastays.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aura Stays. Designed & Developed by Antigravity. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-to-top" id="scroll-top-btn" aria-label="Scroll to Top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
